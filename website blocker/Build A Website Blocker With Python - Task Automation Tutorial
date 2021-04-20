@@ -1,0 +1,51 @@
+In this Python Tutorial we create a website blocker that automates the site blocking for us and helps us to be more productive. This can be helpful if you have a new year's 
+resolution to consume less social media.
+
+The Script
+This is the code. Modify the end_time and set the time until you want all your sites blocked. Also define all the websites you want to have blocked in the sites_to_block list. 
+Windows users must also update the correct path to the hosts file (see the commented out path). Then you have 3 options how to use it:
+
+Trigger script manually every now and then
+Setup a Cron job
+Leave the scipt running in the background with a while True loop
+How does it work?
+The approach is very simple. We only modify the hosts file and define a mapping from the blocked domain name to our 127.0.0.1 IP address. This way, all requests to the domain 
+are redirected to our localhost. Usually there is no server running on localhost, so we will see a "Site can't be reached message". Before you play around with this code and 
+modify the file, you might want to create a backup copy of your hosts file.
+
+
+
+
+from datetime import datetime
+
+end_time = datetime(2021, 1, 1, 20) # y, m, d, h, min
+
+sites_to_block = ['www.facebook.com', 'facebook.com']
+
+hosts_path = '/etc/hosts'
+#r"C:\Windows\System32\drivers\etc\hosts"
+
+redirect = "127.0.0.1"
+
+def block_websites():
+    if datetime.now() < end_time: 
+        print("Block sites")
+        with open(hosts_path, 'r+') as hostfile:
+            hosts_content = hostfile.read()
+            for site in  sites_to_block:
+                if site not in hosts_content:
+                   hostfile.write(redirect + ' ' + site + '\n')
+    else:
+        print('Unblock sites')
+        with open(hosts_path, 'r+') as hostfile:
+            lines = hostfile.readlines()
+            hostfile.seek(0)
+            for line in lines:
+                if not any(site in line for site in sites_to_block):
+                    hostfile.write(line)
+            hostfile.truncate()
+
+
+# sudo python main.py
+if __name__ == '__main__':
+    block_websites()
