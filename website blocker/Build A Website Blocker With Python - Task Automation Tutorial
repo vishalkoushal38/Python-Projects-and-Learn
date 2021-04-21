@@ -13,7 +13,7 @@ The approach is very simple. We only modify the hosts file and define a mapping 
 are redirected to our localhost. Usually there is no server running on localhost, so we will see a "Site can't be reached message". Before you play around with this code and 
 modify the file, you might want to create a backup copy of your hosts file.
 
-
+Full Code Below: Save as anything.pyw 
 
 
 from datetime import datetime
