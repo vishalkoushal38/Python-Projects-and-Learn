@@ -48,7 +48,6 @@ canvas1.create_window(150, 230, window=exitButton)
 root.mainloop()
 
 
-Run the code in Python, and you’ll see the following display:
-https://datatofish.com/wp-content/uploads/2019/11/01_image_to_pdf_tkinter.png
+
 
 
