@@ -39,3 +39,8 @@ while (True):
         print("Calculator:", response)
     except:
         print("Calculator: Please enter valid input.")
+ 
+
+# Use the relevant command.
+# This program only do addition and substraction.
+# Example 2 plus 24; ten plus twenty = 30; etc
